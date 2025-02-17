@@ -117,8 +117,7 @@ export default async function ProjectPage({ params }: { params: { id: string } }
     redirect('/login');
   }
 
-  // Properly await the params
-  const { id } = await params;
+  const { id } = params;
   const { project, user } = await getProject(userId, id);
   
   // Use currentDiagram if available; otherwise fall back to history[0]
