@@ -4,9 +4,15 @@ import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import Project from '@/models/Project';
 
+type RouteSegmentProps = {
+  params: {
+    id: string
+  }
+}
+
 export async function POST(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: RouteSegmentProps
 ) {
   try {
     const { userId } = await auth();
@@ -29,9 +35,8 @@ export async function POST(
       });
     }
 
-    // Use the id from context.params
     const project = await Project.findOne({
-      _id: context.params.id,
+      _id: params.id,
       userId: user._id,
     });
 
