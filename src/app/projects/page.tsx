@@ -8,6 +8,7 @@ import CreateProjectModal from '@/components/CreateProjectModal';
 import { getProjects } from './actions';
 import DeleteProjectModal from '@/components/DeleteProjectModal';
 import OnboardingBar from '@/components/OnboardingBar';
+import PricingModal from '@/components/PricingModal';
 
 interface Project {
   _id: string;
@@ -41,6 +42,7 @@ export default function ProjectsPage() {
   const router = useRouter();
 
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isPricingOpen, setIsPricingOpen] = useState(false);
 
   useEffect(() => {
     async function loadInitialProjects() {
@@ -138,7 +140,10 @@ export default function ProjectsPage() {
               )}
             </button>
             {user && (
-              <div className="flex items-center space-x-2 px-4 py-2 rounded-lg backdrop-blur-sm">
+              <div 
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg backdrop-blur-sm cursor-pointer hover:bg-white/5"
+                onClick={() => setIsPricingOpen(true)}
+              >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className={`h-4 w-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`} 
@@ -374,6 +379,12 @@ export default function ProjectsPage() {
             onDelete={handleDeleteProject}
           />
         )}
+
+        <PricingModal 
+          isOpen={isPricingOpen} 
+          onClose={() => setIsPricingOpen(false)}
+          userId={user?._id || ''}
+        />
       </div>
     </div>
   );

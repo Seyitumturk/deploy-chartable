@@ -179,7 +179,7 @@ const PromptPanel: React.FC<PromptPanelProps> = ({
           <>
             <div
               ref={chatContainerRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-secondary/10 hover:scrollbar-thumb-secondary/20 scrollbar-track-transparent"
+              className="flex-1 overflow-y-auto p-4 space-y-4"
             >
               {/* Welcome Message */}
               <div className="flex items-start space-x-3">
@@ -197,7 +197,7 @@ const PromptPanel: React.FC<PromptPanelProps> = ({
               </div>
               {/* Chat History */}
               <div
-                className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-secondary/10 hover:scrollbar-thumb-secondary/20 scrollbar-track-transparent"
+                className="flex-1 overflow-y-auto p-4 space-y-4"
               >
                 {chatHistory.map((message, index) => (
                   <ChatMessage 
@@ -402,7 +402,7 @@ const PromptPanel: React.FC<PromptPanelProps> = ({
           <>
             <div
               ref={chatContainerRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-secondary/10 hover:scrollbar-thumb-secondary/20 scrollbar-track-transparent"
+              className="flex-1 overflow-y-auto p-4 space-y-4"
             >
               {/* Welcome Message */}
               <div className="flex items-start space-x-3">
@@ -420,7 +420,7 @@ const PromptPanel: React.FC<PromptPanelProps> = ({
               </div>
               {/* Chat History */}
               <div
-                className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-secondary/10 hover:scrollbar-thumb-secondary/20 scrollbar-track-transparent"
+                className="flex-1 overflow-y-auto p-4 space-y-4"
               >
                 {chatHistory.map((message, index) => (
                   <ChatMessage 

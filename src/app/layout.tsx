@@ -27,6 +27,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
