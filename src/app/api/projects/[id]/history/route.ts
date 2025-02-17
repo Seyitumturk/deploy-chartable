@@ -1,11 +1,14 @@
+'use server'
+
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import Project from '@/models/Project';
 
+// This is the correct type for Next.js App Router route handlers
 export async function POST(
-  req: NextRequest,
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -14,7 +17,7 @@ export async function POST(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { prompt, diagram, updateType } = await req.json();
+    const { prompt, diagram, updateType } = await request.json();
 
     await connectDB();
     
