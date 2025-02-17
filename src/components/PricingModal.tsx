@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+interface StripePricingTableElement extends HTMLElement {
+  // Add any specific properties needed
+}
+
 declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'stripe-pricing-table': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-    }
+  interface HTMLElementTagNameMap {
+    'stripe-pricing-table': StripePricingTableElement;
   }
 }
 

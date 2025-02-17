@@ -33,7 +33,7 @@ const OnboardingBar: React.FC = () => {
         </svg>
         <span className="font-medium">Welcome to Chartable!</span>
         <span className="ml-2">
-          Click "New Diagram" to start creating beautiful diagrams with AI.
+          Click &quot;New Diagram&quot; to start creating beautiful diagrams with AI.
         </span>
       </div>
       <button 
