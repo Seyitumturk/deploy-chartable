@@ -6,7 +6,7 @@ import Project from '@/models/Project';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const { userId } = await auth();
@@ -29,10 +29,9 @@ export async function POST(
       });
     }
 
-    // Properly await params.id
-    const { id } = await params;
+    // Use the id from context.params
     const project = await Project.findOne({
-      _id: id,
+      _id: context.params.id,
       userId: user._id,
     });
 
