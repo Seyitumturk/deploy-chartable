@@ -7,17 +7,19 @@ import User from '@/models/User';
 import Project from '@/models/Project';
 
 // This is the correct type for Next.js App Router route handlers
-export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(req: NextRequest) {
   try {
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { prompt, diagram, updateType } = await request.json();
+    // Get project ID from URL using searchParams
+    const url = new URL(req.url);
+    const segments = url.pathname.split('/');
+    const projectId = segments[segments.indexOf('projects') + 1];
+
+    const { prompt, diagram, updateType } = await req.json();
 
     await connectDB();
     
@@ -27,7 +29,7 @@ export async function POST(
     }
 
     const project = await Project.findOne({
-      _id: params.id,
+      _id: projectId,
       userId: user._id,
     });
 
