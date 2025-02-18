@@ -114,7 +114,7 @@ async function getProject(userId: string, projectId: string) {
 }
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
@@ -124,7 +124,8 @@ export default async function ProjectPage({ params, searchParams }: PageProps) {
     redirect('/login');
   }
 
-  const { id } = params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
   const project = await getProject(userId, id);
 
   // Use currentDiagram if available; otherwise fall back to history[0]
