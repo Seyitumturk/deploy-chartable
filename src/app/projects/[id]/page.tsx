@@ -6,6 +6,8 @@ import User from '@/models/User';
 import Project, { IProject } from '@/models/Project';
 import DiagramEditor from './editor';
 import { Types } from 'mongoose';
+import { getProjectById } from '@/lib/project';
+import ProjectDetail from '@/components/ProjectDetail';
 
 interface MongoHistoryItem {
   _id: Types.ObjectId;
@@ -111,40 +113,32 @@ async function getProject(userId: string, projectId: string) {
   };
 }
 
-export default async function ProjectPage({
-  params,
-  searchParams,
-}: {
+interface PageProps {
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
-}) {
+}
+
+export default async function ProjectPage({ params, searchParams }: PageProps) {
   const { userId } = await auth();
   if (!userId) {
     redirect('/login');
   }
 
   const { id } = params;
-  const { project, user } = await getProject(userId, id);
+  const project = await getProject(userId, id);
 
   // Use currentDiagram if available; otherwise fall back to history[0]
-  const currentDiagram = project.currentDiagram || (project.history[0]?.diagram || '');
+  const currentDiagram = project.project.currentDiagram || (project.project.history[0]?.diagram || '');
 
   // Create user display data
   const userDisplayData = {
-    credits: user.wordCountBalance,
-    initials: `${user.firstName[0]}${user.lastName[0]}`
+    credits: project.user.wordCountBalance,
+    initials: `${project.user.firstName[0]}${project.user.lastName[0]}`
   };
 
   return (
     <main className="min-h-screen bg-background">
-      <DiagramEditor
-        projectId={project._id}
-        projectTitle={project.title}
-        diagramType={project.diagramType}
-        initialDiagram={currentDiagram}
-        user={userDisplayData}
-        history={project.history}
-      />
+      <ProjectDetail project={project.project} />
     </main>
   );
 } 
