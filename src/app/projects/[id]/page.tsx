@@ -119,10 +119,10 @@ export default async function ProjectPage({ params }: { params: { id: string } }
 
   const { id } = params;
   const { project, user } = await getProject(userId, id);
-  
+
   // Use currentDiagram if available; otherwise fall back to history[0]
   const currentDiagram = project.currentDiagram || (project.history[0]?.diagram || '');
-  
+
   // Create user display data
   const userDisplayData = {
     credits: user.wordCountBalance,
