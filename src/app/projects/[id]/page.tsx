@@ -111,7 +111,13 @@ async function getProject(userId: string, projectId: string) {
   };
 }
 
-export default async function ProjectPage({ params }: { params: { id: string } }) {
+export default async function ProjectPage({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const { userId } = await auth();
   if (!userId) {
     redirect('/login');
